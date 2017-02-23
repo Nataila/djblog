@@ -15,4 +15,14 @@ class Post(models.Model):
 class PostAdmin(object):
     list_display = ('title', 'created_at',)
 
+    def get_media(self):
+        js = (
+            '/static/plugins/kindeditor-4.1.7/kindeditor-all-min.js',
+            '/static/plugins/kindeditor-4.1.7/lang/zh_CN.js',
+            '/static/plugins/kindeditor-4.1.7/config.js',
+        )
+        media = super(PostAdmin, self).get_media()
+        media.add_js(js)
+        return media
+
 xadmin.site.register(Post, PostAdmin)
